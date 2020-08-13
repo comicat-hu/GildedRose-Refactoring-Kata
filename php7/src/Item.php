@@ -2,7 +2,7 @@
 
 namespace App;
 
-final class Item {
+abstract class Item {
 
     public $name;
     public $sell_in;
@@ -17,5 +17,19 @@ final class Item {
     public function __toString() {
         return "{$this->name}, {$this->sell_in}, {$this->quality}";
     }
+
+    public function increaseQuality() {
+        if ($this->quality < 50) {
+            $this->quality = $this->quality + 1;
+        }
+    }
+
+    public function decreaseQuality() {
+        if ($this->quality > 0) {
+            $this->quality = $this->quality - 1;
+        }
+    }
+
+    abstract function update();
 }
 
