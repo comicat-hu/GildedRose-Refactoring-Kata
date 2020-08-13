@@ -13,30 +13,20 @@ final class GildedRose {
     public function updateQuality() {
         foreach ($this->items as $item) {
             if ($item->name == 'Aged Brie') {
-                if ($item->quality < 50) {
-                    $item->quality = $item->quality + 1;
-                }
+                $this->increaseQuality($item);
 
                 $item->sell_in = $item->sell_in - 1;
 
                 if ($item->sell_in < 0) {
-                    if ($item->quality < 50) {
-                        $item->quality = $item->quality + 1;
-                    }
+                    $this->increaseQuality($item);
                 }
             } else if ($item->name == 'Backstage passes to a TAFKAL80ETC concert') {
-                if ($item->quality < 50) {
-                    $item->quality = $item->quality + 1;
-                    if ($item->sell_in < 11) {
-                        if ($item->quality < 50) {
-                            $item->quality = $item->quality + 1;
-                        }
-                    }
-                    if ($item->sell_in < 6) {
-                        if ($item->quality < 50) {
-                            $item->quality = $item->quality + 1;
-                        }
-                    }
+                $this->increaseQuality($item);
+                if ($item->sell_in < 11) {
+                    $this->increaseQuality($item);
+                }
+                if ($item->sell_in < 6) {
+                    $this->increaseQuality($item);
                 }
 
                 $item->sell_in = $item->sell_in - 1;
@@ -58,6 +48,12 @@ final class GildedRose {
                     }
                 }
             }
+        }
+    }
+
+    private function increaseQuality($item) {
+        if ($item->quality < 50) {
+            $item->quality = $item->quality + 1;
         }
     }
 }
