@@ -6,17 +6,17 @@ class BackstagePassesItem extends Item {
     
     public function update() {
         $this->increaseQuality();
-        if ($this->sell_in < 11) {
+
+        if ($this->getSellIn() < 11) {
             $this->increaseQuality();
         }
-        if ($this->sell_in < 6) {
+        if ($this->getSellIn() < 6) {
             $this->increaseQuality();
         }
 
-        $this->sell_in = $this->sell_in - 1;
-
-        if ($this->sell_in < 0) {
-            $this->quality = 0;
+        $this->decreaseSellIn();
+        if ($this->getSellIn() < 0) {
+            $this->setQuality(0);
         }
     }
 }
