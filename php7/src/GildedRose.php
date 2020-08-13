@@ -37,15 +37,11 @@ final class GildedRose {
             } else if ($item->name == 'Sulfuras, Hand of Ragnaros') {
 
             } else {
-                if ($item->quality > 0) {
-                    $item->quality = $item->quality - 1;
-                }
+                $this->decreaseQuality($item);
                 $item->sell_in = $item->sell_in - 1;
 
                 if ($item->sell_in < 0) {
-                    if ($item->quality > 0) {
-                        $item->quality = $item->quality - 1;
-                    }
+                    $this->decreaseQuality($item);
                 }
             }
         }
@@ -54,6 +50,12 @@ final class GildedRose {
     private function increaseQuality($item) {
         if ($item->quality < 50) {
             $item->quality = $item->quality + 1;
+        }
+    }
+
+    private function decreaseQuality($item) {
+        if ($item->quality > 0) {
+            $item->quality = $item->quality - 1;
         }
     }
 }
